@@ -6,11 +6,38 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Mi Chat</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
+        <h1>CHAT WEBSOCKET</h1>
+        <div style="text-align: center">
+        <form action="">
+            <table>
+                <tr>
+                    <td>
+                        <b>Usuarios<br></b>
+                        <textarea rows="6" cols="20" id ="userField"></textarea>
+                    </td>
+                    <td>
+                        <b>Chat log<br></b>
+                        <textarea rows="6" cols="20" id ="chatLogField"></textarea>
+                    </td>                      
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input id="textField" name="name" type="text"><br>
+                        <input onclick="join()" value="Join" type="button"><br>
+                        <input onclick="sendMessage();" value="Chat" type="button"><br>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        </div>
+        <div id="output"></div>
+        <script language="javascript" type="text/javascript" src="websocket.js">
+            
+        </script>
     </body>
 </html>

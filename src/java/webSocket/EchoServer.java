@@ -5,9 +5,15 @@
  */
 package webSocket;
 
+import java.io.IOException;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import javax.websocket.EncodeException;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
+import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 /**
@@ -17,17 +23,24 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint("/echo")
 public class EchoServer {
 
+    private static final Set<Session> peers = Collections.synchronizedSet(new HashSet<Session>());
+    
+    
     @OnMessage
-    public String onMessage(String message) {
-        return null;
+    public void onMessage(String message, Session client) throws IOException, EncodeException {
+        for(Session peer:peers){
+            peer.getBasicRemote().sendObject(message);
+        }
     }
 
     @OnOpen
-    public void onOpen(Throwable t) {
+    public void onOpen(Session peer) {
+        peers.add(peer);
     }
 
     @OnClose
-    public void onClose(Throwable t) {
+    public void onClose(Session peer) {
+        peers.add(peer);
     }
     
 }
